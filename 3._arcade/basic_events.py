@@ -21,6 +21,7 @@ class EventsView(arcade.View):
         # estado de la app
         self.char = CircleCharacter(WIDTH // 2, HEIGHT // 2)
         self.speed = 4
+        self.stroke_points = []
 
     # 1. atencion de eventos
     def on_key_press(self, symbol, modifiers):
@@ -33,14 +34,26 @@ class EventsView(arcade.View):
 
     def on_mouse_press(self, x, y, button, modifiers):
         print(f"boton presionado! {button} en posicion: {x}, {y}")
+        self.stroke_points = []
         # self.char.x = x
         # self.char.y = y
     def on_mouse_drag(self, x, y, dx, dy, _buttons, _modifiers):
-        print(f"arrastrando! {_buttons} en posicion: {x},{y}, con velocidad: {dx},{dy}")
+        # print(f"arrastrando! {_buttons} en posicion: {x},{y}, con velocidad: {dx},{dy}")
+        self.stroke_points.append((x, y))
+
+    def on_mouse_release(self, x, y, button, modifiers):
+        self.char.x = x
+        self.char.y = y
+        
+
+    def draw_stroke(self):
+        arcade.draw_line_strip(self.stroke_points, arcade.color.GREEN, 3)
     # 3. renderizacion
     def on_draw(self):
         self.clear()
         self.char.draw()
+        self.draw_stroke()
+    
 
 
 def main():
