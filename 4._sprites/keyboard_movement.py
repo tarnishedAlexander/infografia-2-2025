@@ -11,8 +11,13 @@ class Player(arcade.Sprite):
         self.score = 0
 
     def update(self, delta_time: float = 1/60):
+        # MRU
         self.center_x += self.change_x
         self.center_y += self.change_y
+
+        # x_k+1 = x_k + dx
+        # self.center_x = self.center_x + self.change_x
+
     
     def check_coins(self, coins: arcade.SpriteList):
         for coin in coins:
@@ -36,7 +41,6 @@ class Bullet(arcade.SpriteSolidColor):
         if self.center_x > WIDTH or self.center_x < 0:
             self.remove_from_sprite_lists() # auto eliminacion
         
-
 class Coin(arcade.Sprite):
     def __init__(self, scale = 1, center_x = 0, center_y = 0):
         super().__init__("4._sprites/img/coin.png", scale, center_x, center_y)
@@ -98,8 +102,7 @@ class KeyboardMovementView(arcade.View):
             self.player.change_y = 0
         elif symbol in [arcade.key.LEFT, arcade.key.RIGHT]:
             self.player.change_x = 0
-                
-            
+                        
 
 def main():
     window = arcade.Window(WIDTH, HEIGHT, TITLE)
