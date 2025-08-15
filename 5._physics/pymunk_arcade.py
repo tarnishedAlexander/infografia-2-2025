@@ -16,14 +16,22 @@ class App(arcade.View):
         # body
         body = pymunk.Body(mass=5, moment=pymunk.moment_for_box(1, (30, 30)))
         body.position = (WIDTH // 2, HEIGHT // 2)
+        body.angle = 0.2
+
+        # floor body
+        floor_body = pymunk.Body(body_type=pymunk.Body.STATIC)
+        floor_shape = pymunk.Segment(floor_body, (0, 20), (WIDTH, 20), 0)
+        floor_shape.friction = 0.1
+        floor_shape.elasticity = 0.7
 
         #shape
         self.shape = pymunk.Poly.create_box(body, (30, 30))
-        self.shape.elasticity = 0.3
-        self.shape.friction = 0.3
+        self.shape.elasticity = 0.9
+        self.shape.friction = 0.1
 
         # agregar al space
         self.space.add(body, self.shape)
+        self.space.add(floor_body, floor_shape)
 
         # sprite
         self.sprites = arcade.SpriteList()
