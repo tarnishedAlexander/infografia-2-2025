@@ -1,5 +1,6 @@
 import arcade
 import math
+import numpy as np
 
 WIDTH = 1280
 HEIGHT = 720
@@ -19,25 +20,28 @@ class Poly:
     
     def draw(self):
         arcade.draw_polygon_outline(self.vertices, self.color, 3)
+
+    def apply_transform(self, TM):
+        v_array = np.array([[x, y, 1] for x, y in self.vertices])
+        v_array = np.transpose(v_array)
+        # aplicar transformacion
+        new_v_array = np.dot(TM, v_array)
+        new_v_array = new_v_array[:2, :]
+        new_v_array = np.transpose(new_v_array)
+        self.vertices = new_v_array.tolist()
     
     def translate(self, dx, dy):
-        self.vertices = [(x + dx, y + dy) for x, y in self.vertices]
-    
+        TM = np.array([
+            [1, 0, dx],
+            [0, 1, dy],
+            [0, 0, 1]
+            ])
+        self.apply_transform(TM)
+
     def scale(self, s):
-        self.vertices = [(x * s, y * s) for x, y in self.vertices]
-    
+        pass
     def rotate(self, angle, px=0, py=0):
-        new_vertices = []
-        angle_radians = math.radians(angle)
-        for x, y in self.vertices:
-            new_vertices.append(
-                (
-                    (x - px) * math.cos(angle_radians) - (y - py) * math.sin(angle_radians) + px,
-                    (x - px) * math.sin(angle_radians) + (y - py) * math.cos(angle_radians) + py
-                )
-            )
-        
-        self.vertices = new_vertices
+        pass
 
 class TransformView(arcade.View):
     def __init__(self):
@@ -45,7 +49,7 @@ class TransformView(arcade.View):
         self.background_color = arcade.color.BLACK
         self.poly = Poly(points)
         self.poly2 = Poly(points, arcade.color.GREEN)
-        self.poly2.rotate(-75, 100, 100)
+        self.poly2.translate(300, 300)
 
     def on_draw(self):
         self.clear()
