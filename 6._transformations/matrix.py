@@ -41,7 +41,28 @@ class Poly:
     def scale(self, s):
         pass
     def rotate(self, angle, px=0, py=0):
-        pass
+        angle_radians = np.radians(angle)
+        # T1 mover al origen
+        T1 = np.array([
+            [1, 0, -px],
+            [0, 1, -py],
+            [0, 0, 1]
+        ])
+        # rotar en el origen
+        T2 = np.array([
+            [np.cos(angle_radians), -np.sin(angle_radians), 0],
+            [np.sin(angle_radians), np.cos(angle_radians), 1],
+            [0, 0, 1],
+        ])
+        # mover al pivote
+        T3 = np.array([
+            [1, 0, px],
+            [0, 1, py],
+            [0, 0, 1]
+        ])
+        TM = np.dot(T3, np.dot(T2, T1))
+        self.apply_transform(TM)
+
 
 class TransformView(arcade.View):
     def __init__(self):
