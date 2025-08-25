@@ -1,0 +1,98 @@
+[gd_scene load_steps=9 format=3 uid="uid://dw5q3x0oxuqed"]
+
+[ext_resource type="Script" uid="uid://b3e0x74y6c23h" path="res://scripts/main.gd" id="1_jyhfs"]
+[ext_resource type="PackedScene" uid="uid://cs54j3pa3unhv" path="res://scenes/player.tscn" id="1_o5qli"]
+[ext_resource type="PackedScene" uid="uid://b4dnm188v1ehm" path="res://scenes/coin.tscn" id="2_0wfyh"]
+[ext_resource type="Texture2D" uid="uid://gvses4tyfovb" path="res://assets/textures/block.png" id="3_sugp2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jyhfs"]
+size = Vector2(484, 56)
+
+[sub_resource type="LabelSettings" id="LabelSettings_tbgi4"]
+font_size = 25
+
+[sub_resource type="LabelSettings" id="LabelSettings_tefeu"]
+font_size = 25
+
+[sub_resource type="LabelSettings" id="LabelSettings_o6xl0"]
+font_size = 40
+
+[node name="Main" type="Node2D" node_paths=PackedStringArray("player", "coins_container", "score_label", "timer_label", "message_label", "game_timer")]
+script = ExtResource("1_jyhfs")
+player = NodePath("Player")
+coins_container = NodePath("Coins")
+score_label = NodePath("CanvasLayer/ScoreLabel")
+timer_label = NodePath("CanvasLayer/TimerLabel")
+message_label = NodePath("CanvasLayer/MessageLabel")
+game_timer = NodePath("Timer")
+
+[node name="Player" parent="." instance=ExtResource("1_o5qli")]
+position = Vector2(120, 450)
+jump_velocity = -600.0
+
+[node name="Coins" type="Node2D" parent="."]
+
+[node name="Coin" parent="Coins" instance=ExtResource("2_0wfyh")]
+position = Vector2(576, 437)
+
+[node name="Coin2" parent="Coins" instance=ExtResource("2_0wfyh")]
+position = Vector2(246, 508)
+
+[node name="Coin3" parent="Coins" instance=ExtResource("2_0wfyh")]
+position = Vector2(406, 517)
+
+[node name="Coin4" parent="Coins" instance=ExtResource("2_0wfyh")]
+position = Vector2(837, 510)
+
+[node name="Coin5" parent="Coins" instance=ExtResource("2_0wfyh")]
+position = Vector2(1051, 413)
+
+[node name="Floor" type="StaticBody2D" parent="."]
+position = Vector2(26, 587)
+
+[node name="Sprite2D" type="Sprite2D" parent="Floor"]
+position = Vector2(212.5, 0)
+scale = Vector2(7.64062, 1)
+texture = ExtResource("3_sugp2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+position = Vector2(214, 0)
+shape = SubResource("RectangleShape2D_jyhfs")
+
+[node name="Floor2" type="StaticBody2D" parent="."]
+position = Vector2(692, 586)
+
+[node name="Sprite2D" type="Sprite2D" parent="Floor2"]
+position = Vector2(212.5, 0)
+scale = Vector2(7.64062, 1)
+texture = ExtResource("3_sugp2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor2"]
+position = Vector2(214, 0)
+shape = SubResource("RectangleShape2D_jyhfs")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ScoreLabel" type="Label" parent="CanvasLayer"]
+offset_right = 113.0
+offset_bottom = 41.0
+text = "Score: "
+label_settings = SubResource("LabelSettings_tbgi4")
+
+[node name="TimerLabel" type="Label" parent="CanvasLayer"]
+offset_left = 949.0
+offset_top = 7.0
+offset_right = 1125.0
+offset_bottom = 61.0
+text = "TIme:"
+label_settings = SubResource("LabelSettings_tefeu")
+
+[node name="MessageLabel" type="Label" parent="CanvasLayer"]
+offset_left = 522.0
+offset_top = 166.0
+offset_right = 724.0
+offset_bottom = 259.0
+text = "-"
+label_settings = SubResource("LabelSettings_o6xl0")
+
+[node name="Timer" type="Timer" parent="."]

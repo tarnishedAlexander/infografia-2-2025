@@ -26,14 +26,14 @@ class Poly:
     def scale(self, s):
         self.vertices = [(x * s, y * s) for x, y in self.vertices]
     
-    def rotate(self, angle):
+    def rotate(self, angle, px=0, py=0):
         new_vertices = []
         angle_radians = math.radians(angle)
         for x, y in self.vertices:
             new_vertices.append(
                 (
-                    x * math.cos(angle_radians) - y * math.sin(angle_radians),
-                    x * math.sin(angle_radians) + y * math.cos(angle_radians)
+                    (x - px) * math.cos(angle_radians) - (y - py) * math.sin(angle_radians) + px,
+                    (x - px) * math.sin(angle_radians) + (y - py) * math.cos(angle_radians) + py
                 )
             )
         
@@ -45,7 +45,7 @@ class TransformView(arcade.View):
         self.background_color = arcade.color.BLACK
         self.poly = Poly(points)
         self.poly2 = Poly(points, arcade.color.GREEN)
-        self.poly2.rotate(45)
+        self.poly2.rotate(-75, 100, 100)
 
     def on_draw(self):
         self.clear()
