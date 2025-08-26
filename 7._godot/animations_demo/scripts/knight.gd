@@ -5,6 +5,7 @@ extends CharacterBody2D
 @export var damage: int = 10
 @export var hp: int = 100
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var state_machine = $AnimationTree.get("parameters/playback")
 
 func _physics_process(delta: float) -> void:
 	var input_vector = Vector2.ZERO
@@ -16,9 +17,12 @@ func _physics_process(delta: float) -> void:
 	
 	if input_vector != Vector2.ZERO:
 		# en movimiento
-		animation_player.play("Run")
+		state_machine.travel("Run")
 	else:
-		animation_player.play("Idle")
+		state_machine.travel("Idle")
+	
+	if Input.is_action_just_pressed("attack"):
+		state_machine.travel("Attack")
 	
 	if velocity.x < 0:
 		# flip

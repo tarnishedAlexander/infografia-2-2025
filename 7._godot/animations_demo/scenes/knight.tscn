@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://bm3immiri88yy"]
+[gd_scene load_steps=47 format=3 uid="uid://bm3immiri88yy"]
 
 [ext_resource type="Script" uid="uid://du38s1lu50tqs" path="res://scripts/knight.gd" id="1_3i0j8"]
 [ext_resource type="Texture2D" uid="uid://dy8wbp5t0cu6l" path="res://assets/texture/knight/Idle (1).png" id="2_qxgmm"]
@@ -109,6 +109,39 @@ _data = {
 &"Run": SubResource("Animation_fnu1q")
 }
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_pdmsg"]
+animation = &"Attack"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qd0la"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ggoaa"]
+animation = &"Run"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8pn50"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bt444"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_p2wyf"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_irm4b"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_m012m"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_3vh21"]
+states/Attack/node = SubResource("AnimationNodeAnimation_pdmsg")
+states/Attack/position = Vector2(218.5, 161.237)
+states/Idle/node = SubResource("AnimationNodeAnimation_qd0la")
+states/Idle/position = Vector2(308.135, 35.3687)
+states/Run/node = SubResource("AnimationNodeAnimation_ggoaa")
+states/Run/position = Vector2(436.135, 127.737)
+states/Start/position = Vector2(132.5, 34.5101)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_8pn50"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_bt444"), "Idle", "Run", SubResource("AnimationNodeStateMachineTransition_p2wyf"), "Idle", "Attack", SubResource("AnimationNodeStateMachineTransition_irm4b"), "Attack", "Idle", SubResource("AnimationNodeStateMachineTransition_m012m")]
+graph_offset = Vector2(2.29878e-05, -34.7625)
+
 [node name="Knight" type="CharacterBody2D"]
 script = ExtResource("1_3i0j8")
 max_speed = 300
@@ -125,3 +158,7 @@ shape = SubResource("CapsuleShape2D_0dyjn")
 libraries = {
 &"": SubResource("AnimationLibrary_fnu1q")
 }
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_3vh21")
+anim_player = NodePath("../AnimationPlayer")
