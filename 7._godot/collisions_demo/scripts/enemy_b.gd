@@ -24,11 +24,9 @@ func _on_timer_timeout() -> void:
 	timer.wait_time = rn.randi_range(1, 3)
 	timer.start()
 
-
 func _on_activate_zone_body_entered(body: Node2D) -> void:
 	animation_player.play("Active")
 	timer.start()
-
 
 func _on_activate_zone_body_exited(body: Node2D) -> void:
 	animation_player.play("Idle")

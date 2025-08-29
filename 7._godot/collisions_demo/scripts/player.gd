@@ -39,3 +39,7 @@ func _physics_process(delta: float) -> void:
 		state_machine.travel("Idle")
 		
 	move_and_slide()
+
+
+func _on_hurtbox_area_entered(area: Area2D) -> void:
+	print("OUCH!")
