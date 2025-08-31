@@ -126,11 +126,10 @@ shape = SubResource("RectangleShape2D_nukko")
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 16
-collision_mask = 0
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("CircleShape2D_vwptu")
-disabled = true
 debug_color = Color(0.708025, 0.485336, 0.116112, 0.42)
 
 [node name="Timer" type="Timer" parent="."]
@@ -138,3 +137,4 @@ debug_color = Color(0.708025, 0.485336, 0.116112, 0.42)
 [connection signal="body_entered" from="ActivateZone" to="." method="_on_activate_zone_body_entered"]
 [connection signal="body_exited" from="ActivateZone" to="." method="_on_activate_zone_body_exited"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hurtbox_body_entered"]
