@@ -1371,6 +1371,7 @@ states/Pick/position = Vector2(392, 260)
 states/Run/node = SubResource("AnimationNodeBlendSpace2D_5r6bn")
 states/Run/position = Vector2(371.5, 36)
 transitions = ["Idle", "Axe", SubResource("AnimationNodeStateMachineTransition_e3l1l"), "Idle", "Pick", SubResource("AnimationNodeStateMachineTransition_keks0"), "Axe", "Idle", SubResource("AnimationNodeStateMachineTransition_cbeod"), "Pick", "Idle", SubResource("AnimationNodeStateMachineTransition_441cy"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_dgl02"), "Idle", "Run", SubResource("AnimationNodeStateMachineTransition_rb16a"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_mkb0t")]
+graph_offset = Vector2(224.64, 7.72503)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1k5iw"]
 radius = 6.0
@@ -1401,7 +1402,7 @@ libraries = {
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_giqun")
 anim_player = NodePath("../AnimationPlayer")
-parameters/Axe/blend_position = Vector2(0, 0)
+parameters/Axe/blend_position = Vector2(-0.000901699, 0.00299728)
 parameters/Idle/blend_position = Vector2(0, 0)
 parameters/Pick/blend_position = Vector2(0, 0)
 parameters/Run/blend_position = Vector2(0, 0)

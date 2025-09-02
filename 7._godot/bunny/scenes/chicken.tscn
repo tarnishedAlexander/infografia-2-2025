@@ -47,8 +47,12 @@ script = ExtResource("1_hergc")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_0e1bf")
-frame_progress = 0.972426
+frame = 2
+frame_progress = 0.797389
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 1)
 shape = SubResource("CircleShape2D_l4vbk")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+debug_enabled = true
