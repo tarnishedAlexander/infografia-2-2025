@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://dqiwkbsxl5ql2"]
+
+[ext_resource type="Script" uid="uid://p4g5msof6mt1" path="res://scenes/scripts/main.gd" id="1_jyhfs"]
+[ext_resource type="Texture2D" uid="uid://bwuqaciaorv1m" path="res://assets/textures/background_color_hills.png" id="1_o5qli"]
+[ext_resource type="Texture2D" uid="uid://dfua74lrvkw5g" path="res://assets/textures/hud_heart_empty.png" id="3_tbgi4"]
+[ext_resource type="Texture2D" uid="uid://d4i4yu4lk1pp3" path="res://assets/textures/hud_heart.png" id="4_tefeu"]
+
+[node name="Main" type="Control" node_paths=PackedStringArray("healthbar")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jyhfs")
+healthbar = NodePath("TextureProgressBar")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 647.0
+texture = ExtResource("1_o5qli")
+
+[node name="HSlider" type="HSlider" parent="."]
+layout_mode = 0
+offset_left = 318.0
+offset_top = 306.0
+offset_right = 471.0
+offset_bottom = 355.0
+scale = Vector2(3, 3)
+step = 10.0
+tick_count = 10
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+layout_mode = 0
+offset_left = 457.0
+offset_top = 63.0
+offset_right = 521.0
+offset_bottom = 127.0
+scale = Vector2(3, 3)
+step = 10.0
+value = 20.0
+texture_under = ExtResource("3_tbgi4")
+texture_progress = ExtResource("4_tefeu")
+
+[connection signal="value_changed" from="HSlider" to="." method="_on_h_slider_value_changed"]
